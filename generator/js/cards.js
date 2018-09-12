@@ -8,6 +8,7 @@ function card_default_options() {
         default_color: "black",
         default_icon: "ace",
         default_title_size: "13",
+        default_body_text_size: "5",
         page_size: "A4",
         page_rows: 3,
         page_columns: 3,
@@ -75,6 +76,18 @@ function card_data_icon_back(card_data, options) {
     return card_data.icon_back || card_data.icon || options.default_icon || "ace";
 }
 
+function card_data_body_text_font(card_data, options) {
+    return card_data.body_text_size || options.default_body_text_size || "8";
+}
+
+function card_data_subtitle_text_font(card_data, options) {
+    return (parseFloat(card_data_body_text_font(card_data, options)) + 2).toString();
+}
+
+function card_data_section_text_font(card_data, options) {
+    return (parseFloat(card_data_body_text_font(card_data, options)) + 2).toString();
+}
+
 function card_data_split_params(value) {
     return value.split("|").map(function (str) { return str.trim(); });
 }
@@ -105,6 +118,7 @@ function card_element_icon(card_data, options) {
 }
 
 function card_element_subtitle(params, card_data, options) {
+    var subtitle_text_font = card_data_subtitle_text_font(card_data, options);
     var subtitle = params[0] || "";
     return '<div class="card-element card-subtitle">' + subtitle + '</div>';
 }
@@ -460,6 +474,7 @@ function card_pages_generate_style(options) {
     switch (options.page_size) {
         case "A3": size = "A3 portrait"; break;
         case "A4": size = "210mm 297mm"; break;
+        case "A4-landscape": size = "297mm 210mm"; break;
         case "A5": size = "A5 portrait"; break;
         case "Letter": size = "letter portrait"; break;
         case "25x35": size = "2.5in 3.5in"; break;

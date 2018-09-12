@@ -1,5 +1,6 @@
 .card {
     border: 2mm solid;
+    border-radius: 4px;
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -211,7 +212,7 @@
     font-style: italic;
 }
 .card-description-name::after {
-    content: ".";
+    content: "";
 }
 .card-description-text {
     display: inline;
